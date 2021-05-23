@@ -13,7 +13,7 @@ const IndexPage = () => {
     const formData = { name: name, email: email, message: message };
 
     const axiosOptions = {
-      url: this.props.location.pathname,
+      url: '/',
       method: 'post',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: qs.stringify(formData),
