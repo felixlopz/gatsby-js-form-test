@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import * as qs from 'query-string';
 
 const encode = (data) => {
   return Object.keys(data)
@@ -17,6 +15,9 @@ class ContactForm extends React.Component {
   /* Here’s the juicy bit for posting the form submission */
 
   handleSubmit = (e) => {
+    console.log(this.state);
+
+    e.preventDefault();
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -24,8 +25,6 @@ class ContactForm extends React.Component {
     })
       .then(() => alert('Success!'))
       .catch((error) => alert(error));
-
-    e.preventDefault();
   };
 
   handleChange = (e) => this.setState({ [e.target.name]: e.target.value });
@@ -34,41 +33,33 @@ class ContactForm extends React.Component {
     const { name, email, message } = this.state;
     return (
       <form onSubmit={this.handleSubmit} name="contact" data-netlify="true">
-        <p>
-          <label>
-            Your Name:{' '}
-            <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={this.handleChange}
-            />
-          </label>
-        </p>
-        <p>
-          <label>
-            Your Email:{' '}
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={this.handleChange}
-            />
-          </label>
-        </p>
-        <p>
-          <label>
-            Message:{' '}
-            <textarea
-              name="message"
-              value={message}
-              onChange={this.handleChange}
-            />
-          </label>
-        </p>
-        <p>
-          <button type="submit">Send</button>
-        </p>
+        <label>
+          Your Name:{' '}
+          <input
+            type="text"
+            name="name"
+            value={name}
+            onChange={this.handleChange}
+          />
+        </label>
+        <label>
+          Your Email:{' '}
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={this.handleChange}
+          />
+        </label>
+        <label>
+          Message:{' '}
+          <textarea
+            name="message"
+            value={message}
+            onChange={this.handleChange}
+          />
+        </label>
+        <button type="submit">Send</button>
       </form>
     );
   }
